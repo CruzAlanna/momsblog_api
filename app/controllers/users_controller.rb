@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authorize_request, except: [ :create ]
+
   def index
     users = User.all
     render json: users
@@ -19,7 +21,7 @@ class UsersController < ApplicationController
       password_confirmation: params[:password_confirmation]
     )
     if user.save
-      render json: user, status: :created
+      render json: { message: 'User created successfully' }, status: :created
     else 
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end
