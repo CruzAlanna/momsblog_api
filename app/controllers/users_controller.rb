@@ -2,12 +2,15 @@ class UsersController < ApplicationController
   before_action :authorize_request, except: [ :create ]
 
   def index
-    users = User.all
+    users = policy_scope(User)
     render json: users
   end
 
   def show
     user = User.find(params[:id])
+
+    authorize user
+
     render json: user
   end
 
@@ -18,7 +21,8 @@ class UsersController < ApplicationController
       email: params[:email],
       username: params[:username],
       password: params[:password],
-      password_confirmation: params[:password_confirmation]
+      password_confirmation: params[:password_confirmation],
+      role: params[:role]
     )
     if user.save
       render json: { message: 'User created successfully' }, status: :created
@@ -29,12 +33,15 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
+
+    authorize user
+
     if user.update(
       first_name: params[:first_name] || user.first_name,
       last_name: params[:last_name] || user.last_name,
       username: params[:username] || user.username,
       password: params[:password] || user.password,
-      password_confirmation: params[:password_confirmation] || user.password_confirmation,
+      password_confirmation: params[:password_confirmation] || user.password_confirmation
     )
       render json: user
     else
@@ -44,6 +51,9 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
+
+    authorize user
+    
     user.destroy
     render json: { message: 'User successfully deleted' }, status: :ok
   end

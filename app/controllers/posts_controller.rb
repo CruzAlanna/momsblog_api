@@ -28,6 +28,9 @@ class PostsController < ApplicationController
 
   def update
     post = Post.find(params[:id])
+
+    authorize post
+
     if post.update(
       title: params[:title] || post.title,
       author: params[:author] || post.author,
@@ -42,6 +45,9 @@ class PostsController < ApplicationController
 
   def destroy
     post = Post.find(params[:id])
+
+    authorize post
+    
     post.destroy
     render json: { message: 'Post removed' }, status: :ok
   end

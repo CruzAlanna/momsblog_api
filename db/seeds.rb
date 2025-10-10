@@ -1,6 +1,6 @@
-User.create(first_name: "Alanna", last_name: "Cruz", email: "lanna@mail.com", username: "CruzAlanna", password: "pass", password_confirmation: "pass")
-User.create(first_name: "Elijah", last_name: "Quichocho", email: "elijah@mail.com", username: "QElijah", password: "pword", password_confirmation: "pword")
-User.create(first_name: "Carmen", last_name: "Quichocho", email: "mamie@mail.com", username: "QCarmen", password: "babyy", password_confirmation: "babyy")
+User.create(first_name: "Alanna", last_name: "Cruz", email: "lanna@mail.com", username: "CruzAlanna", password: "pass", password_confirmation: "pass", role: "super_admin")
+User.create(first_name: "Elijah", last_name: "Quichocho", email: "elijah@mail.com", username: "QElijah", password: "pword", password_confirmation: "pword", role: "admin")
+User.create(first_name: "Carmen", last_name: "Quichocho", email: "mamie@mail.com", username: "QCarmen", password: "babyy", password_confirmation: "babyy", role: "student")
 
 Post.create(title: "Seeding Data", author: "Alanna Cruz", content: "Hello everybody, this is a seeded post. I created this so that I can test out my controllers and routes using HTTPie. I like to have data already in the database when starting my server up.", user_id: 1)
 Post.create(title: "TV Obsession", author: "Carmen Quichocho", content: "Hello everybody, this is a seeded post. Mamie's favorite programs to watch are Frozen, Moana, Moana 2, Mickey Mouse Clubhouse, Spiderman, Coco, and Lilo and Stitch.", user_id: 3)
