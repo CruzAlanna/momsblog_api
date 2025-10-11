@@ -14,10 +14,10 @@ class PostsController < ApplicationController
   def create
     post = Post.new(
       title: params[:title],
-      author: params[:author],
-      date: params[:date],
+      author: set_author,
+      date: set_date,
       content: params[:content],
-      user_id: params[:user_id]
+      user_id: current_user.id
     )
     if post.save
       render json: post, status: :created
@@ -33,9 +33,8 @@ class PostsController < ApplicationController
 
     if post.update(
       title: params[:title] || post.title,
-      author: params[:author] || post.author,
-      content: params[:content] || post.content,
-      user_id: params[:user_id] || post.user_id,
+      date: set_date,
+      content: params[:content] || post.content
     )
       render json: post
     else

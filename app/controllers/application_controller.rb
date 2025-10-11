@@ -23,5 +23,13 @@ class ApplicationController < ActionController::API
   def user_not_authorized
     render json: { error: 'You are not authorized to perform this action.' }, status: :forbidden
   end
+
+  def set_date
+    date = Date.today
+  end
+
+  def set_author
+    author = "#{current_user.first_name} #{current_user.last_name}"
+  end
     
 end

@@ -19,12 +19,12 @@ class UsersController < ApplicationController
       first_name: params[:first_name],
       last_name: params[:last_name],
       email: params[:email],
-      username: params[:username],
       password: params[:password],
       password_confirmation: params[:password_confirmation],
       role: params[:role]
     )
     if user.save
+      user.update(username: "#{params[:last_name]}#{params[:first_name]}")
       render json: { message: 'User created successfully' }, status: :created
     else 
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     if user.update(
       first_name: params[:first_name] || user.first_name,
       last_name: params[:last_name] || user.last_name,
-      username: params[:username] || user.username,
+      email: params[:email] | user.email,
       password: params[:password] || user.password,
       password_confirmation: params[:password_confirmation] || user.password_confirmation
     )
