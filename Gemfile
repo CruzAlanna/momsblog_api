@@ -15,6 +15,8 @@ gem 'jwt', '~> 2.2'      # For generating JSON Web Tokens
 
 gem 'pundit'        # For Authorization
 
+gem 'rack-cors' #connect to frontend
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
